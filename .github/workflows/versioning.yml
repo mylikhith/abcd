@@ -1,0 +1,17 @@
+name: Versioning
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create version tag
+        run: |
+          git tag v${{ github.run_number }}
+          git push origin v${{ github.run_number }}
