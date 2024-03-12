@@ -13,5 +13,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Create version tag
         run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git tag v${{ github.run_number }}
-          git push origin v${{ github.run_number }}
+          git push --tags --force origin v${{ github.run_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
